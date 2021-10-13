@@ -4,6 +4,7 @@
 	virgula: .asciiz ","
 	perdeuMensagem: .asciiz "\nSequência Incorreta!!"
 	ganhouMensagem: .asciiz "\nParabéns Você ganhou!!"
+	testeMensagem: .asciiz "\nsequencia numero: "
 .text
 	# Função main
 	main:	
@@ -53,23 +54,52 @@
 		la $a0, novaLinha
 		syscall
 		
-		# setando o indície $t0 pra 0
+		# indice do array
 		addi $t0, $zero, 0
+		# indice da quantidade de sequências
+		addi $t1, $zero, 0
 		gameLoop:
-			beq $t0, 40, ganhou
+			# se o loop chegar a 10 sequências ele acaba e o jogador ganha
+			beq $t1, 10, ganhou
+			# incrementa a quantidade de input pedido e a sequência
+			addi $t1, $t1, 1
+			# seta o indice do array de volta pra zero
+			addi $t0, $zero, 0
 			
-			lw $t6, array($t0)
-			
-			#inputPlayer
-			li $v0, 5
+			# printa a quantidade de número que a sequência pede para testes
+			li $v0, 4
+			la $a0, testeMensagem
 			syscall
-			move $t1, $v0
 			
-			bne $t6, $t1, perdeu
+			li $v0, 1
+			move $a0, $t1
+			syscall
 			
-			addi $t0, $t0, 4
+			li $v0, 4
+			la $a0, novaLinha
+			syscall
+			sequencia:
+				# multiplica o valor de $t1 para definir a quantidade de indices do array necessarios
+				mul $t2, $t1, 4
+				
+				# se a quantidade de indices do array for igual ao $t0 volta para o gameLoop
+				beq $t0, $t2, gameLoop
+				# carrega o indice do array especificado pelo $t0
+				lw $t6, array($t0)
 			
-			j gameLoop
+				# pega um inteiro do usuario para testes
+				li $v0, 5
+				syscall
+				move $t3, $v0
+				
+				# se o valor de $t6, que é o valor retirado do array, for diferente do input jogador perde
+				bne $t6, $t3, perdeu
+				
+				# adiciona 4 ao $t0, ou seja proximo item do array
+				addi $t0, $t0, 4
+				
+				# retorna ao inicio do loop sequencia
+				j sequencia
     		
 	# Termina o programa
 	li $v0, 10
@@ -77,6 +107,7 @@
 	syscall
 	
 	ganhou:
+		# printa a mensagem ganhou e finaliza o programa
 		li $v0, 4
 		la $a0, ganhouMensagem
 		syscall
@@ -85,6 +116,7 @@
 		li $a0, 0
 		syscall
 	perdeu:
+		# printa a mensagem perdeu
 		li $v0, 4
 		la $a0, perdeuMensagem
 		syscall
