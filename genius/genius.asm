@@ -2,6 +2,7 @@
 	hello: .asciiz "Hello World!!"
 .text
 	# Função main
+	#teste
 	main:
 		li $v0, 4
 		la $a0, hello
