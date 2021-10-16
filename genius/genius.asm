@@ -1,4 +1,4 @@
-# Configuracoes bitmap display													
+# Configuracoes bitmap display: 												
 # unit width/height pixel = 32x32										
 # display width/height pixel = 512x512								
 # base address for display = heap (0x10040000)
@@ -13,7 +13,7 @@
 	ganhouMensagem: .asciiz "\nParabéns Você ganhou!!"
 	testeMensagem: .asciiz "\nsequencia numero: "
 	instruction: .asciiz "\n1. Azul 2. Vermelho 3.Verde 4.Amarelo"
-	vermelhoA:    .word 0x00FF4500 #vermelho aceso
+	vermelhoA:    .word 0x00FF0000 #vermelho aceso
     	vermelho:    .word 0x008B0000 #vermelho 
     	azulA:        .word 0x000000FF #Azul aceso
     	azul:        .word 0x0000008B #Azul 
@@ -30,84 +30,113 @@
         	syscall
     	.end_macro
     	
-	.macro printarLinha(%pixel, %cor) 
-        	add $t2, $zero, %pixel
-        	addi $t3, $t2, 32  
+    	#primeiro pixel da linha, cor da linha
+	.macro printLine(%pixel, %cor) 
+        	#contador que possui o valor do pixel no inicio
+        	add $t2, $zero, %pixel 
+        	#pixel +32 para limitação
+        	addi $t3, $t2, 32 
 
-        	lw $t4, tela
+		#carrega posicionamento dos quadrantes no registrador $t2 
+        	lw $t4, tela 
         	lacoLinha: 
             		beq $t3, $t2, fimLacoLinha 
+            		#insere valor no endereço de memoria $t2
             		sw  %cor, 0($t2) 
-            		addi $t4, $t4, 4
-            		addi $t2, $t2, 4
+            		#incrementação $t2 = $t2+4
+            		addi $t4, $t4, 4 
+            		#incrementação $t1 = $t1+4
+            		addi $t2, $t2, 4 
+            		#retorna para o inicio
             		j lacoLinha 
         	fimLacoLinha: 
     	.end_macro
 
-	.macro printarQuadrado(%pixel,%cor)
+	.macro printSquare(%pixel,%cor)
+        	
+        	#contador que possui o valor do pixel no inicio
         	add $t7, $zero, %pixel     
+        	#pixel +32 para limitação
         	addi $t5, $t7, 32  
         
+        	#carrega posicionamento dos quadrantes no registrador $t2 
         	lw $t6, tela
         	add $t6, $t6, %pixel 
         	lacoColuna:
+            		#fim do laço
             		beq $t5, $t7, fimLacoColuna  
-            		printarLinha($t6, %cor)    
+            		printLine($t6, %cor)    
+            		#pula linha
             		addi $t6, $t6, 64
+            		#incrementação $t1=$t1+4
             		addi $t7, $t7, 4         
             		j lacoColuna
         	fimLacoColuna:
     	.end_macro
     	
-    	.macro printarTelaApagada()
-        	addi $t0, $zero, 0 #primeiro quadrante 
+    	.macro printBlankScreen()
+        	
+        	#primeiro quadrante 
+        	addi $t0, $zero, 0
+        	#cor azul apagada
         	lw $t1, azul 
-        	printarQuadrado($t0, $t1)
+        	printSquare($t0, $t1)
         
-        	addi $t0, $zero, 512 #terceiro quadrante
+        	#terceiro quadrante
+        	addi $t0, $zero, 512 
+        	#cor verde apagada
         	lw $t1, verde 
-        	printarQuadrado($t0, $t1)
+        	printSquare($t0, $t1)
                 
-        	addi $t0, $zero, 32 #segundo quadrante
+                #segundo quadrante
+        	addi $t0, $zero, 32
+        	#cor vermelha apagada 
         	lw $t1, vermelho
-        	printarQuadrado($t0, $t1)
+        	printSquare($t0, $t1)
         
-        	addi $t0, $zero, 544 #quarto quadrante
+        	#quarto quadrante
+        	addi $t0, $zero, 544 
+        	#cor amarelo apagada 
         	lw $t1, amarelo 
-        	printarQuadrado($t0, $t1)
+        	printSquare($t0, $t1)
     	.end_macro
     	
-    	.macro printarAceso(%aceso, %cor2) #macro para apagar cor que estava acesa e acender a proxiuma
-        	printarTelaApagada()
-        
-        	printarQuadrado(%aceso, %cor2) #acende proxima
+    	 #apaga a cor que estava acesa e acende a proxiuma
+    	.macro printBright(%aceso, %cor2)
+        	printBlankScreen()
+        	
+        	#acende proxima
+        	printSquare(%aceso, %cor2) 
         
         	wait()
     	.end_macro
     
-    	.macro corSelecionada(%valor)
+    	.macro selectedColour(%valor)
+        	#Compara o valor da cor com o numero do imput
         	beq %valor, 1, azul
         	beq %valor, 2, vermelho
         	beq %valor, 3, verde
         	beq %valor, 4, amarelo
+        	
+        	#acende a cor selecionada
         	azul:
             		lw $k1, azulA
-            		printarAceso($zero, $k1)
+            		printBright($zero, $k1)
             		j exit
         	verde:
         		addi $k0, $zero, 512
             		lw $k1, verdeA
-            		printarAceso($k0, $k1)
+            		printBright($k0, $k1)
             		j exit
         	vermelho:
             		addi $k0, $zero, 32
             		lw $k1, vermelhoA
-            		printarAceso($k0, $k1)
+            		printBright($k0, $k1)
             		j exit
         	amarelo:
             		addi $k0, $zero, 544
             		lw $k1, amareloA
-            		printarAceso($k0, $k1)
+            		printBright($k0, $k1)
             		j exit
         	exit:
     	.end_macro
@@ -139,7 +168,7 @@
 			la $a0, instruction
 			syscall
 		
-		printarTelaApagada()
+		printBlankScreen()
 		# indice do array
 		addi $s0, $zero, 0
 		# indice da quantidade de sequências
@@ -183,8 +212,8 @@
 				syscall
 				move $s3, $v0
 				
-				corSelecionada($s3)
-				printarTelaApagada()
+				selectedColour($s3)
+				printBlankScreen()
 				
 				# se o valor de $t6, que é o valor retirado do array, for diferente do input jogador perde
 				bne $s6, $s3, perdeu
@@ -211,14 +240,14 @@
 			beq $s0, $s2, exitWhileMostraSequencia
 			lw $s6, array($s0)
 			
-			corSelecionada($s6)
+			selectedColour($s6)
 			
 			# sleep de 0,5s
 			li $v0, 32
 			addi $a0, $zero, 500
 			syscall
 			
-			printarTelaApagada()
+			printBlankScreen()
 			
 			# sleep de 0,5s
 			li $v0, 32
@@ -244,51 +273,51 @@
 		# animação de vitoria
 		addi $t0, $zero, 1
 		
-		corSelecionada($t0)
+		selectedColour($t0)
 			
-		printarTelaApagada()
+		printBlankScreen()
 
 		addi $t0, $zero, 2
 		
-		corSelecionada($t0)
+		selectedColour($t0)
 			
-		printarTelaApagada()
+		printBlankScreen()
 		
 		addi $t0, $zero, 4
 		
-		corSelecionada($t0)
+		selectedColour($t0)
 			
-		printarTelaApagada()
+		printBlankScreen()
 		
 		addi $t0, $zero, 3
 		
-		corSelecionada($t0)
+		selectedColour($t0)
 			
-		printarTelaApagada()
+		printBlankScreen()
 		
 		addi $t0, $zero, 1
 		
-		corSelecionada($t0)
+		selectedColour($t0)
 			
-		printarTelaApagada()
+		printBlankScreen()
 
 		addi $t0, $zero, 2
 		
-		corSelecionada($t0)
+		selectedColour($t0)
 			
-		printarTelaApagada()
+		printBlankScreen()
 		
 		addi $t0, $zero, 4
 		
-		corSelecionada($t0)
+		selectedColour($t0)
 			
-		printarTelaApagada()
+		printBlankScreen()
 		
 		addi $t0, $zero, 3
 		
-		corSelecionada($t0)
+		selectedColour($t0)
 			
-		printarTelaApagada()
+		printBlankScreen()
 		
 		li $v0, 10
 		li $a0, 0
