@@ -9,8 +9,8 @@
 	array: .word 0:10
 	virgula: .asciiz ","
 	teste: .asciiz "\nteste"
-	perdeuMensagem: .asciiz "\nSequência Incorreta!!"
-	ganhouMensagem: .asciiz "\nParabéns Você ganhou!!"
+	perdeuMensagem: .asciiz "\nSequï¿½ncia Incorreta!!"
+	ganhouMensagem: .asciiz "\nParabï¿½ns Vocï¿½ ganhou!!"
 	testeMensagem: .asciiz "\nsequencia numero: "
 	instruction: .asciiz "\n1. Azul 2. Vermelho 3.Verde 4.Amarelo"
 	vermelhoA:    .word 0x00FF0000 #vermelho aceso
@@ -34,18 +34,18 @@
 	.macro printLine(%pixel, %cor) 
         	#contador que possui o valor do pixel no inicio
         	add $t2, $zero, %pixel 
-        	#pixel +32 para limitação
+        	#pixel +32 para limitaï¿½ï¿½o
         	addi $t3, $t2, 32 
 
 		#carrega posicionamento dos quadrantes no registrador $t2 
         	lw $t4, tela 
         	lacoLinha: 
             		beq $t3, $t2, fimLacoLinha 
-            		#insere valor no endereço de memoria $t2
+            		#insere valor no endereï¿½o de memoria $t2
             		sw  %cor, 0($t2) 
-            		#incrementação $t2 = $t2+4
+            		#incrementaï¿½ï¿½o $t2 = $t2+4
             		addi $t4, $t4, 4 
-            		#incrementação $t1 = $t1+4
+            		#incrementaï¿½ï¿½o $t1 = $t1+4
             		addi $t2, $t2, 4 
             		#retorna para o inicio
             		j lacoLinha 
@@ -56,19 +56,19 @@
         	
         	#contador que possui o valor do pixel no inicio
         	add $t7, $zero, %pixel     
-        	#pixel +32 para limitação
+        	#pixel +32 para limitaï¿½ï¿½o
         	addi $t5, $t7, 32  
         
         	#carrega posicionamento dos quadrantes no registrador $t2 
         	lw $t6, tela
         	add $t6, $t6, %pixel 
         	lacoColuna:
-            		#fim do laço
+            		#fim do laï¿½o
             		beq $t5, $t7, fimLacoColuna  
             		printLine($t6, %cor)    
             		#pula linha
             		addi $t6, $t6, 64
-            		#incrementação $t1=$t1+4
+            		#incrementaï¿½ï¿½o $t1=$t1+4
             		addi $t7, $t7, 4         
             		j lacoColuna
         	fimLacoColuna:
@@ -101,7 +101,7 @@
         	printSquare($t0, $t1)
     	.end_macro
     	
-    	 #apaga a cor que estava acesa e acende a proxiuma
+    	 #apaga a cor que estava acesa e acende a proxiuma a
     	.macro printBright(%aceso, %cor2)
         	printBlankScreen()
         	
@@ -141,11 +141,11 @@
         	exit:
     	.end_macro
     	
-	# Função main
+	# Funï¿½ï¿½o main
 	main:	
-		# setando o indície $t0 pra 0
+		# setando o indï¿½cie $t0 pra 0
 		addi $t0, $zero, 0
-		# while para iniciar o array com números aleatorio de 1 a 4
+		# while para iniciar o array com nï¿½meros aleatorio de 1 a 4
 		whileIniciaRandom:
 			beq $t0, 40, exitWhileIniciaRandom
 			
@@ -155,13 +155,13 @@
     			add $a0, $a0, 1  # seta o limite inferior 1
 			
 			addi $s0, $a0, 0
-			sw $s0, array($t0) # guarda o número gerado no array
+			sw $s0, array($t0) # guarda o nï¿½mero gerado no array
 			
 			addi $t0, $t0, 4
 		j whileIniciaRandom
 		exitWhileIniciaRandom:
 		
-		# setando o indície $t0 pra 0
+		# setando o indï¿½cie $t0 pra 0
 		addi $t0, $zero, 0
 		
 			li $v0, 4
@@ -171,12 +171,12 @@
 		printBlankScreen()
 		# indice do array
 		addi $s0, $zero, 0
-		# indice da quantidade de sequências
+		# indice da quantidade de sequï¿½ncias
 		addi $s1, $zero, 0
 		gameLoop:
-			# se o loop chegar a 10 sequências ele acaba e o jogador ganha
+			# se o loop chegar a 10 sequï¿½ncias ele acaba e o jogador ganha
 			beq $s1, 10, ganhou
-			# incrementa a quantidade de input pedido e a sequência
+			# incrementa a quantidade de input pedido e a sequï¿½ncia
 			addi $s1, $s1, 1
 			# seta o indice do array de volta pra zero
 			addi $s0, $zero, 0
@@ -186,7 +186,7 @@
 			addi $s0, $zero, 0
 			#teste
 			
-			# printa a quantidade de número que a sequência pede para testes
+			# printa a quantidade de nï¿½mero que a sequï¿½ncia pede para testes
 			li $v0, 4
 			la $a0, testeMensagem
 			syscall
@@ -215,7 +215,7 @@
 				selectedColour($s3)
 				printBlankScreen()
 				
-				# se o valor de $t6, que é o valor retirado do array, for diferente do input jogador perde
+				# se o valor de $t6, que ï¿½ o valor retirado do array, for diferente do input jogador perde
 				bne $s6, $s3, perdeu
 				
 				# adiciona 4 ao $t0, ou seja proximo item do array
@@ -229,7 +229,7 @@
 	li $a0, 0
 	syscall
 	
-	# Função que acende as luzes na sequência antes do input do user
+	# Funï¿½ï¿½o que acende as luzes na sequï¿½ncia antes do input do user
 	mostraSequencia:
 		# sleep de 0,5s
 		li $v0, 32
@@ -270,7 +270,7 @@
 		addi $a0, $zero, 250
 		syscall
 		
-		# animação de vitoria
+		# animaï¿½ï¿½o de vitoria
 		addi $t0, $zero, 1
 		
 		selectedColour($t0)
