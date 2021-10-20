@@ -101,7 +101,7 @@
         	printSquare($t0, $t1)
     	.end_macro
     	
-    	 #apaga a cor que estava acesa e acende a proxiuma a
+    	 #apaga a cor que estava acesa e acende a proxiuma b
     	.macro printBright(%aceso, %cor2)
         	printBlankScreen()
         	
