@@ -15,7 +15,7 @@
 </p>
 
 <h1>Objetivo</h1>
-<p1>Esse projeto foi desenvolvido como uma atividade avaliativa da disciplina de Arquitetura e Organização de Computadores na UFRPE (Universidade Federal Rural de Pernambuco), e teve como objetivo o aprendizado da linguagem Assembly implementada por meio do MARS MIPS simulator, uma IDE leve para programação na linguagem Assembly MIPS, as seguintes teclas foram utilizadas como input:<br><br> 1. Azul	:blue_square: 2. Vermelho :red_square: 3.Verde :green_square: 4.Amarelo :yellow_square:.</p1>
+<p1>Esse projeto foi desenvolvido como uma atividade avaliativa da disciplina de Arquitetura e Organização de Computadores na UFRPE (Universidade Federal Rural de Pernambuco), e teve como objetivo o aprendizado da linguagem Assembly implementada por meio do MARS MIPS simulator, uma IDE leve para programação na linguagem Assembly MIPS, as seguintes teclas foram utilizadas como input:<br><br> 1. Azul	:blue_square: 2. Vermelho :red_square: 3. Verde :green_square: 4. Amarelo :yellow_square:.</p1>
 
 <h1>Demonstração</h1>
 
