@@ -19,7 +19,7 @@
 
 <h1>Demonstração</h1>
 
-<h1 align='center'><img src='./assets/book-finder-demo.gif'></img></h1>
+<h1 align='center'><img src='./assets/demo.gif'></img></h1>
 
 <h1>Tecnologias</h1>
 
