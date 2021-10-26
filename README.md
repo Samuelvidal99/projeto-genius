@@ -1,6 +1,6 @@
 <h1 align="center">Projeto Genius</h1>
 
-[![GitHub license](https://img.shields.io/github/license/Samuelvidal99/book-finder-app?style=for-the-badge)](https://github.com/Samuelvidal99/book-finder-app/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Samuelvidal99/book-finder-app?style=for-the-badge)](https://github.com/Samuelvidal99/projeto-genius/blob/main/LICENSE)
 
 <p align="center">Clássico jogo Genius implementado no MARS MIPS Simulator.</p>
 
