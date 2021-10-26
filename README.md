@@ -21,7 +21,7 @@
 
 <h1 align='center'><img src='./assets/book-finder-demo.gif'></img></h1>
 
-## Tecnologias
+<h1>Tecnologias</h1>
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
