@@ -53,15 +53,15 @@ Feito por <b>Samuel Vidal</b>, Entre em contato por:
 <a href="https://github.com/nicole-pereira"><sub><b>Nicole Pereira</b></sub></a><br><br>
 Feito por <b>Nicole Pereira</b>, Entre em contato por: 
 
-[![Gmail Badge](https://img.shields.io/badge/-samuelvsantos2018@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:samuelvsantos2018@gmail.com)](mailto:samuelvsantos2018@gmail.com)
+[![Gmail Badge](https://img.shields.io/badge/-xnicoleft@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:xnicoleft@gmail.com)](mailto:xnicoleft@gmail.com)
 
 <a href="https://github.com/aldenirtelles"><sub><b>Aldenir Telles</b></sub></a><br><br>
 Feito por <b>Aldenir Telles</b>, Entre em contato por: 
 
-[![Gmail Badge](https://img.shields.io/badge/-samuelvsantos2018@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:samuelvsantos2018@gmail.com)](mailto:samuelvsantos2018@gmail.com)
+[![Gmail Badge](https://img.shields.io/badge/-aldenirtelless@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:aldenirtelless@gmail.com)](mailto:aldenirtelless@gmail.com)
 
 <a href="https://github.com/clararomeiro"><sub><b>Ana Clara Romeiro</b></sub></a><br><br>
 Feito por <b>Ana Clara Romeiro</b>, Entre em contato por: 
 
-[![Gmail Badge](https://img.shields.io/badge/-samuelvsantos2018@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:samuelvsantos2018@gmail.com)](mailto:samuelvsantos2018@gmail.com)
+[![Gmail Badge](https://img.shields.io/badge/-clararomeirocosta@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:clararomeirocosta@gmail.com)](mailto:clararomeirocosta@gmail.com)
 
