@@ -10,7 +10,7 @@
  <a href="#tecnologias">Tecnologias</a> • 
  <a href="#requisitos">Requisitos</a> • 
  <a href="#status-do-projeto">Status do Projeto</a> • 
- <a href="https://github.com/Samuelvidal99/book-finder-app/blob/master/LICENSE">Licença</a> • 
+ <a href="https://github.com/Samuelvidal99/projeto-genius/blob/main/LICENSE">Licença</a> • 
  <a href="#autores">Autores</a>
 </p>
 
